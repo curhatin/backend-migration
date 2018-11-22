@@ -2,9 +2,9 @@ const models = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 exports.getAll = (req, res) => {
-  models.accounts
+  models.account
     .findAll()
-    .then(accounts => res.send(account))
+    .then(account => res.send(account))
     .catch(err => res.send(err));
 };
 
@@ -25,7 +25,7 @@ exports.post = (req, res) => {
     .catch(err => res.send(err));
 };
 exports.deleteOne = (req, res) => {
-  models.accounts
+  models.account
     .findOne({ where: { id: req.params.id } })
     .then(user => {
       user
@@ -37,7 +37,7 @@ exports.deleteOne = (req, res) => {
 };
 
 exports.deleteAll = (req, res) => {
-  models.accounts
+  models.account
     .destroy({ where: {}, truncate: true })
     .then(result => res.send("success"))
     .catch(err => res.send(err));
@@ -45,14 +45,14 @@ exports.deleteAll = (req, res) => {
 
 exports.search = (req, res) => {
   console.log(req.query);
-  models.accounts
+  models.account
     .findAll({ where: req.query })
     .then(account => res.send(account))
     .catch(err => res.send(err));
 };
 
 exports.update = (req, res) => {
-  models.accounts
+  models.account
     .update(req.body, {
       where: {
         id: req.params.id
@@ -63,7 +63,7 @@ exports.update = (req, res) => {
 };
 
 exports.login = (req, res) => {
-  models.accounts
+  models.account
     .findOne({ where: { email: req.body.email } })
     .then(account => {
       if (account === null) {
@@ -91,12 +91,12 @@ exports.login = (req, res) => {
         token_data.payload,
         token_data.secret,
         token_data.options
-      )
+      );
       res.send({
-        message:"You are logged in",
-        id : account.id,
+        message: "You are logged in",
+        id: account.id,
         token: token
-      })
+      });
     })
     .catch(err => res.send(err));
 };
