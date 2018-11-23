@@ -4,32 +4,29 @@ const models = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 exports.getAll = (req, res) => {
-  models.account
+  models.tag
     .findAll()
     .then(account => res.send(account))
     .catch(err => res.send(err));
 };
 
 exports.post = (req, res) => {
-  const SALT_WORK_FACTOR = 7;
-  const salt = bcrypt.genSaltSync(SALT_WORK_FACTOR);
-  req.body.password = bcrypt.hashSync(req.body.password, salt);
   console.log(req.body);
-  models.account
+  models.tag
     .create(req.body)
-    .then(account =>
+    .then(tag =>
       res.send({
         message: "insert data success",
-        data: account
+        data: tag
       })
     )
     .catch(err => res.send(err));
 };
 exports.deleteOne = (req, res) => {
-  models.account
+  models.tag
     .findOne({ where: { id: req.params.id } })
-    .then(user => {
-      user
+    .then(tag => {
+      tag
         .destroy()
         .then(result => res.send("success"))
         .catch(err => console.log(err));
@@ -38,7 +35,7 @@ exports.deleteOne = (req, res) => {
 };
 
 exports.deleteAll = (req, res) => {
-  models.account
+  models.tag
     .destroy({ where: {}, truncate: true })
     .then(result => res.send("success"))
     .catch(err => res.send(err));
@@ -46,14 +43,14 @@ exports.deleteAll = (req, res) => {
 
 exports.search = (req, res) => {
   console.log(req.query);
-  models.account
+  models.tag
     .findAll({ where: req.query })
-    .then(account => res.send(account))
+    .then(tag => res.send(tag))
     .catch(err => res.send(err));
 };
 
 exports.update = (req, res) => {
-  models.account
+  models.tag
     .update(req.body, {
       where: {
         id: req.params.id
