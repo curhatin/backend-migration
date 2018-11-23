@@ -5,13 +5,13 @@ module.exports = (sequelize, DataTypes) => {
     {
       accountId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: { model: "accounts", key: "id" }
+        allowNull: true,
+        references: { model: "account", key: "id" }
       },
       tagId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        references: { model: "tags", key: "id" }
+        allowNull: true,
+        // references: { model: "tag", key: "id" }
       },
       post: { type: DataTypes.TEXT, allowNull: false }
     },
@@ -20,14 +20,14 @@ module.exports = (sequelize, DataTypes) => {
   post.associate = function(models) {
     // associations can be defined here
 
-    models.post.hasOne(models.account, {
-      foreignKey: "accountId",
-      targetKey: "id"
-    }),
-    models.post.hasOne(models.tag,{
-      foreignKey:"tagId",
-      targetKey:"id"
-    })
+    // models.post.hasOne(models.account, {
+    //   foreignKey: "accountId",
+    //   targetKey: "id"
+    // })
+    // models.post.hasOne(models.tag,{
+    //   foreignKey:"tagId",
+    //   targetKey:"id"
+    // })
   };
   return post;
 };

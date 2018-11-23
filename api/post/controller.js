@@ -3,13 +3,19 @@ require("dotenv").config();
 const models = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+
 exports.getAll = (req, res) => {
   models.post
     .findAll()
     .then(post => res.send(post))
     .catch(err => res.send(err));
 };
-
+exports.getOne = (req, res) => {
+    models.post
+      .findOne({ where: { id: req.params.id } })
+      .then(post => res.send(post))
+      .catch(err => res.send(err));
+  };
 exports.post = (req, res) => {
   console.log(req.body);
   models.post
