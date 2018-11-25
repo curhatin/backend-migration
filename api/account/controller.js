@@ -9,7 +9,7 @@ exports.getAll = (req, res) => {
     .then(account => res.send(account))
     .catch(err => res.send(err));
 };
-exports.getAll = (req, res) => {
+exports.getOne = (req, res) => {
   models.account
     .findOne({ where: { id: req.params.id } })
     .then(account => res.send(account))
