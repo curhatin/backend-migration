@@ -9,7 +9,12 @@ exports.getAll = (req, res) => {
     .then(account => res.send(account))
     .catch(err => res.send(err));
 };
-
+exports.getAll = (req, res) => {
+  models.account
+    .findOne({ where: { id: req.params.id } })
+    .then(account => res.send(account))
+    .catch(err => res.send(err));
+};
 exports.post = (req, res) => {
   const SALT_WORK_FACTOR = 7;
   const salt = bcrypt.genSaltSync(SALT_WORK_FACTOR);

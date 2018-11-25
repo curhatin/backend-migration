@@ -5,15 +5,16 @@ module.exports = (sequelize, DataTypes) => {
     {
       accountId: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
         references: { model: "account", key: "id" }
       },
       tagId: {
         type: DataTypes.INTEGER,
-        allowNull: true,
-        // references: { model: "tag", key: "id" }
+        allowNull: false,
+         references: { model: "tag", key: "id" }
       },
-      post: { type: DataTypes.TEXT, allowNull: false }
+      post: { type: DataTypes.TEXT, allowNull: false },
+      topic: { type: DataTypes.STRING, allowNull: false }
     },
     {}
   );

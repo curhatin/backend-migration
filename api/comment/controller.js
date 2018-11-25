@@ -3,40 +3,36 @@ require("dotenv").config();
 const models = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
 exports.getAll = (req, res) => {
-  models.post
+  models.comment
     .findAll()
-    .then(post => res.send(post))
+    .then(comment => res.send(comment))
     .catch(err => res.send(err));
-
 };
-exports.getOne = (req, res) => {
-    models.post
-      .findOne({ where: { id: req.params.id } })
-      .then(post => res.send(post))
-      .catch(err => res.send(err));
 
-
-  };
 exports.post = (req, res) => {
-  console.log(req.body);
-  models.post
+  models.comment
     .create(req.body)
-    .then(post =>
-      res.send({
-        message: "insert data success",
-        data: post
+    .then(comment => {
+      models.postComment
+      .create({postId:req.body.postId,commentId:comment.id})
+      .then(postComment =>
+        res.send({
+          message: "insert data success",
+          data: {comment, postComment}
+        })
+      )
+      .catch(err => res.send(err));
       })
-    
-    )
     .catch(err => res.send(err));
+  
+
 };
 exports.deleteOne = (req, res) => {
-  models.post
+  models.account
     .findOne({ where: { id: req.params.id } })
-    .then(post => {
-      post
+    .then(user => {
+      user
         .destroy()
         .then(result => res.send("success"))
         .catch(err => console.log(err));
@@ -45,7 +41,7 @@ exports.deleteOne = (req, res) => {
 };
 
 exports.deleteAll = (req, res) => {
-  models.post
+  models.account
     .destroy({ where: {}, truncate: true })
     .then(result => res.send("success"))
     .catch(err => res.send(err));
@@ -53,14 +49,14 @@ exports.deleteAll = (req, res) => {
 
 exports.search = (req, res) => {
   console.log(req.query);
-  models.post
+  models.account
     .findAll({ where: req.query })
-    .then(tag => res.send(tag))
+    .then(account => res.send(account))
     .catch(err => res.send(err));
 };
 
 exports.update = (req, res) => {
-  models.post
+  models.account
     .update(req.body, {
       where: {
         id: req.params.id

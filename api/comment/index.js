@@ -3,7 +3,6 @@ const router = express.Router();
 const controller = require("./controller");
 
 router.get("/", controller.getAll);
-router.get("/:id", controller.getOne);
 router.post("/login",controller.login)
 router.post("/register", controller.post);
 router.delete("/:id", controller.deleteOne);

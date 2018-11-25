@@ -10,9 +10,11 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   account.associate = function(models) {
-    // associations can be defined here    
-    // models.tag.belongsTo(models.post, { foreignKey: 'accountId', targetKey: 'id' })
-
+    // associations can be defined here
+    models.tag.belongsTo(models.post, {
+      foreignKey: "accountId",
+      targetKey: "id"
+    });
   };
   return account;
 };
