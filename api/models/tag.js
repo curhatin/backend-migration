@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   tag.associate = function(models) {
     // associations can be defined here
-    // models.tag.belongsTo(models.post, { foreignKey: 'tagId', targetKey: 'id' })
+    models.tag.belongsTo(models.post, { foreignKey: 'tagId', targetKey: 'id' })
   };
   return tag;
 };

@@ -1,7 +1,7 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
   const postComment = sequelize.define(
-    "post-comment",
+    "posts-comments",
     {
       postId: {
         type: DataTypes.INTEGER,
@@ -19,14 +19,12 @@ module.exports = (sequelize, DataTypes) => {
   );
   postComment.associate = function(models) {
     // associations can be defined here
-    // models.postComment.hasOne(models.post, {
-    //   foreignKey: "postId",
-    //   targetKey: "id"
-    // }),
-    //   models.postComment.hasOne(models.comment, {
-    //     foreignKey: "commentId",
-    //     targetKey: "id"
-    //   });
+    models["posts-comments"].hasOne(models.post, {
+      foreignKey: "postId"
+    }),
+      models["posts-comments"].hasOne(models.comment, {
+        foreignKey: "commentId"
+      });
   };
   return postComment;
 };

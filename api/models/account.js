@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "accountId",
       targetKey: "id"
     });
+    models.account.belongsTo(models.comment, {
+      foreignKey: "accountId",
+      targetKey: "id"
+    });
+
+
   };
   return account;
 };

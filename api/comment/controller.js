@@ -14,7 +14,7 @@ exports.post = (req, res) => {
   models.comment
     .create(req.body)
     .then(comment => {
-      models.postComment
+      models['posts-comments']
       .create({postId:req.body.postId,commentId:comment.id})
       .then(postComment =>
         res.send({

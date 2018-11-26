@@ -21,14 +21,22 @@ module.exports = (sequelize, DataTypes) => {
   post.associate = function(models) {
     // associations can be defined here
 
-    // models.post.hasOne(models.account, {
-    //   foreignKey: "accountId",
-    //   targetKey: "id"
-    // })
-    // models.post.hasOne(models.tag,{
-    //   foreignKey:"tagId",
-    //   targetKey:"id"
-    // })
+    models.post.hasOne(models.account, {
+      foreignKey: "accountId",
+      targetKey: "id"
+    })
+    models.post.hasOne(models.tag,{
+      foreignKey:"tagId",
+      targetKey:"id"
+    })
+    models.post.belongsTo(models["tags-posts"], {
+      foreignKey: "postId",
+      targetKey: "id"
+    })
+    models.post.belongsTo(models["posts-comments"], {
+      foreignKey: "postId",
+      targetKey: "id"
+    })
   };
   return post;
 };
