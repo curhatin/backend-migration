@@ -19,10 +19,10 @@ module.exports = (sequelize, DataTypes) => {
   );
   postComment.associate = function(models) {
     // associations can be defined here
-    models["posts-comments"].hasOne(models.post, {
+    models["posts-comments"].belongsTo(models.post, {
       foreignKey: "postId"
-    }),
-      models["posts-comments"].hasOne(models.comment, {
+    })
+      models["posts-comments"].belongsTo(models.comment, {
         foreignKey: "commentId"
       });
   };

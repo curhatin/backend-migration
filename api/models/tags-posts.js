@@ -18,11 +18,11 @@ module.exports = (sequelize, DataTypes) => {
   );
   tagComment.associate = function(models) {
     // associations can be defined here
-    models["tags-posts"].hasOne(models.tag, {
+    models["tags-posts"].belongsTo(models.tag, {
       foreignKey: "tagId",
       targetKey: "id"
-    }),
-      models["tags-posts"].hasOne(models.post, {
+    })
+      models["tags-posts"].belongsTo(models.post, {
         foreignKey: "postId",
         targetKey: "id"
       });
