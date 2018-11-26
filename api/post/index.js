@@ -9,6 +9,6 @@ router.post("/add", controller.post);
 router.delete("/:id", controller.deleteOne);
 router.delete("/", controller.deleteAll);
 router.get("/search", controller.search);
-router.put("/:id", controller.update);
+
 
 module.exports = router;

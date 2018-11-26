@@ -57,6 +57,13 @@ exports.search = (req, res) => {
     .catch(err => res.send(err));
 };
 
+exports.findId = (req, res) => {
+  models.account
+    .findAll({ where: req.query })
+    .then(account => res.send(account))
+    .catch(err => res.send(err));
+}
+
 exports.update = (req, res) => {
   models.account
     .update(req.body, {
@@ -106,3 +113,4 @@ exports.login = (req, res) => {
     })
     .catch(err => res.send(err));
 };
+;

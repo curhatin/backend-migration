@@ -108,3 +108,10 @@ exports.login = (req, res) => {
     })
     .catch(err => res.send(err));
 };
+
+exports.emailGetOne = (req, res) => {
+  models.post
+    .findOne({ where: { email: req.params.email } })
+    .then(post => res.send(post))
+    .catch(err => res.send(err));
+};
