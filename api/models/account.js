@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   );
   account.associate = function(models) {
     // associations can be defined here
-    models.tag.belongsTo(models.post, {
+    models.account.belongsTo(models.post, {
       foreignKey: "accountId",
       targetKey: "id"
     });
