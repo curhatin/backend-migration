@@ -20,17 +20,20 @@ exports.getOne = (req, res) => {
 
   };
 exports.post = (req, res) => {
-  console.log(req.body);
   models.post
-    .create(req.body)
-    .then(post =>
+  .create(req.body)
+  .then(post => {
+    models['tags-posts']
+    .create({postId:post.id,tagId:req.body.tagId})
+    .then(tagPost =>
       res.send({
         message: "insert data success",
-        data: post
+        data: {post, tagPost}
       })
-    
     )
     .catch(err => res.send(err));
+    })
+  .catch(err => res.send(err));
 };
 exports.deleteOne = (req, res) => {
   models.post

@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 exports.getAll = (req, res) => {
   models.account
-    .findAll()
+    .findAll({ order: [['updatedAt', 'DESC']]})
     .then(account => res.send(account))
     .catch(err => res.send(err));
 };
