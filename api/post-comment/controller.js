@@ -44,10 +44,11 @@ exports.deleteAll = (req, res) => {
 };
 
 exports.search = (req, res) => {
-  console.log(req.query);
-  models.tag
-    .findAll({ where: req.query })
-    .then(tag => res.send(tag))
+  models["posts-comments"]
+    .findAll({ where: {$like: '%' + req.query +'%'} ,include: [{model : models.post},{model : models.comment}]})
+    .then(result => {
+     res.send(result)
+    })
     .catch(err => res.send(err));
 };
 

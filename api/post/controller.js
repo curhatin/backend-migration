@@ -28,6 +28,7 @@ exports.getOne = (req, res) => {
 
 
 exports.post = (req, res) => {
+  req.body = {...req.body, accountId: req.decoded.id}
   models.post
   .create(req.body)
   .then(post => {
@@ -65,13 +66,15 @@ exports.deleteAll = (req, res) => {
 exports.search = (req, res) => {
   console.log(req.query);
   models.post
-    .findAll({ where: req.query })
-    .then(tag => res.send(tag))
-    .catch(err => res.send(err));
-};
+    .findAll({ where: {$like: '%' + req.query +'%'} ,include: [{model : models.post},{model : models.comment}]})
+    .then(result => {["posts-comments"]
+     res.send(result)
+    })
+    .catch(err => res.send(err))["posts-comments"]["posts-comments"]["posts-comments"]
+};["posts-comments"]
 
-exports.update = (req, res) => {
-  models.post
+exports.update = (req, res) => {["posts-comments"]
+  models.post["posts-comments"]
     .update(req.body, {
       where: {
         id: req.params.id
