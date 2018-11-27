@@ -6,44 +6,39 @@ const jwt = require("jsonwebtoken");
 
 exports.getAll = (req, res) => {
   models.post
-    .findAll({include: [{model: models["posts-comments"]}]})
+    .findAll({ include: [{ model: models["posts-comments"], include: [{model : models.comment}] }] })
     .then(post => res.send(post))
     .catch(err => res.send(err));
-
 };
 exports.getOne = (req, res) => {
-    models.post
-      .findOne({ where: { id: req.params.id } })
-      .then(post => res.send(post))
-      .catch(err => res.send(err));
-
-
-  };
-  exports.getBoth = (req,res) =>{
-    models.post
-    .findOne ({ where: { id: req.params.id},include : [models.comment]})
+  models.post
+    .findOne({ where: { id: req.params.id },include: [{ model: models["posts-comments"], include: [{model : models.comment}] }]  })
+    .then(post => res.send(post))
+    .catch(err => res.send(err));
+};
+exports.getBoth = (req, res) => {
+  models.post
+    .findOne({ where: { id: req.params.id }, include: [models.comment] })
     .then(post => console.log(post))
-    .catch(err => res.send(err))
-  }
-
+    .catch(err => res.send(err));
+};
 
 exports.post = (req, res) => {
-
-  req.body = {...req.body, accountId: req.decoded.id}
+  req.body = { ...req.body, accountId: req.decoded.id };
   models.post
-  .create(req.body)
-  .then(post => {
-    models['tags-posts']
-    .create({postId:post.id,tagId:req.body.tagId})
-    .then(tagPost =>
-      res.send({
-        message: "insert data success",
-        data: {post, tagPost}
-      })
-    )
-    .catch(err => res.send(err));
+    .create(req.body)
+    .then(post => {
+      models["tags-posts"]
+        .create({ postId: post.id, tagId: req.body.tagId })
+        .then(tagPost =>
+          res.send({
+            message: "insert data success",
+            data: { post, tagPost }
+          })
+        )
+        .catch(err => res.send(err));
     })
-  .catch(err => res.send(err));
+    .catch(err => res.send(err));
 };
 exports.deleteOne = (req, res) => {
   models.post
@@ -65,20 +60,19 @@ exports.deleteAll = (req, res) => {
 };
 
 exports.search = (req, res) => {
-
-  let objWhere = {}
-  for ( key in req.query){
-    objWhere[key] = {$like: '%' + req.query[key] +'%'}
+  let objWhere = {};
+  for (key in req.query) {
+    objWhere[key] = { $like: "%" + req.query[key] + "%" };
   }
 
-  console.log(objWhere)
+  console.log(objWhere);
 
   models.post
-    .findAll({ where: objWhere})
+    .findAll({ where: objWhere })
     .then(result => {
-     res.send(result)
+      res.send(result);
     })
-    .catch(err => res.send(err))
+    .catch(err => res.send(err));
 };
 
 exports.update = (req, res) => {

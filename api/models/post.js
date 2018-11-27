@@ -37,6 +37,10 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "postId",
       targetKey: "id"
     })
+    models.post.hasMany(models.comment,{
+      foreignKey: "postId",
+      targetKey:"id"
+    })
   };
   return post;
 };

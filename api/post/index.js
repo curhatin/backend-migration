@@ -5,7 +5,7 @@ const helpers = require("../helpers");
 
 router.get("/search", controller.search);
 router.get("/", helpers.isAuthenticated,controller.getAll);
-router.get("/:id", controller.getOne);
+router.get("/:id",helpers.isAuthenticated, controller.getOne);
 router.post("/login",controller.login)
 router.post("/",helpers.isAuthenticated, controller.post);
 router.delete("/:id", controller.deleteOne);
