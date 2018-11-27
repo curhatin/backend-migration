@@ -3,7 +3,7 @@ const router = express.Router();
 const controller = require("./controller");
 const helpers = require("../helpers");
 
-
+router.get('/me',helpers.isAuthenticated,controller.getme);
 router.get("/search", controller.search);
 router.get("/", helpers.isAuthenticated,controller.getAll);
 router.get("/:id", controller.getOne);

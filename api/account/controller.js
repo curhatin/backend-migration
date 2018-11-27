@@ -76,6 +76,7 @@ exports.update = (req, res) => {
 };
 
 exports.login = (req, res) => {
+  console.log(req.body)
   models.account
     .findOne({ where: { email: req.body.email } })
     .then(account => {
@@ -113,4 +114,8 @@ exports.login = (req, res) => {
     })
     .catch(err => res.send(err));
 };
+
+exports.getme = (req, res) => {
+  res.send(req.account.email)
+}
 ;

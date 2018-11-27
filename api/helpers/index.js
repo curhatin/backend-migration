@@ -10,6 +10,8 @@ module.exports.isAuthenticated = (req, res, next) => {
     (req.headers.authorization && req.headers.authorization.split(" ")[1]) ||
     undefined;
 
+// console.log(token)
+
   if (token === undefined) {
     return res.send("token not found");
   }
@@ -26,13 +28,16 @@ module.exports.isAuthenticated = (req, res, next) => {
         if (account === null) {
           return res.send("Account not found");
         }
+        
 
         req.decoded = decoded;
+        req.account = account
+        next();
       })
       .catch(err => res.send(err));
   } catch (err) {
     return res.send("token not valid");
   }
 
-  next();
+ 
 };

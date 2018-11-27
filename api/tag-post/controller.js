@@ -43,9 +43,11 @@ exports.deleteAll = (req, res) => {
 
 exports.search = (req, res) => {
   console.log(req.query);
-  models.tag
-    .findAll({ where: req.query })
-    .then(tag => res.send(tag))
+  models["tags-posts"]
+    .findAll({ where: req.query ,include: [{model : models.post}]})
+    .then(result => {
+     res.send(result)
+    })
     .catch(err => res.send(err));
 };
 

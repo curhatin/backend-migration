@@ -7,6 +7,7 @@ const account = require("./api/account")
 const tag = require("./api/tag")
 const comment = require("./api/comment")
 const postComment = require ("./api/post-comment")
+const tagPost = require ("./api/tag-post")
 const post = require("./api/post")
 
 const bodyParser = require("body-parser")
@@ -20,4 +21,5 @@ app.use("/tag",tag)
 app.use("/post",post)
 app.use("/comment",comment)
 app.use("/postcomment",postComment)
+app.use("/tagpost",tagPost)
 app.listen(PORT, () => console.log(`App running on port ${PORT}`));
