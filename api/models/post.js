@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "postId",
       targetKey: "id"
     })
-    models.post.hasOne(models["posts-comments"], {
+    models.post.hasMany(models["posts-comments"], {
       foreignKey: "postId",
       targetKey: "id"
     })

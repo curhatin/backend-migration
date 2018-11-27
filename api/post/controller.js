@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 
 exports.getAll = (req, res) => {
   models.post
-    .findAll()
+    .findAll({include: [{model: models["posts-comments"]}]})
     .then(post => res.send(post))
     .catch(err => res.send(err));
 
