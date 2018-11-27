@@ -5,11 +5,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 exports.getAll = (req, res) => {
   models["posts-comments"]
-    .findAll({ where: req.query})
+    .findAll({ where: req.query ,include: [{model : models.post},{model : models.comment}]})
     .then(result => {
-      const a = result[0]
-
-     res.send(a.postId)
+     res.send(result)
     })
     .catch(err => res.send(err));
 };
