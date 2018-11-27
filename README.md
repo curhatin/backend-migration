@@ -8,5 +8,6 @@ Curhatin API
 | tag         | https://curhatin.herokuapp.com/tag              | {tag:string}                                                     |
 | post        | https://curhatin.herokuapp.com/post/add         | {postId : integer , tagId: integer , post : text , topic : text} |
 | comment     | https://curhatin.herokuapp.com/comment/add      | {postId : integer , accountId : integer , comments : TEXT}       |
-| postComment | https://curhatin.herokuapp.com/postcomment/get  | {postId : integer}                                               |
+| postComment get some | https://curhatin.herokuapp.com/postcomment/get  | {postId : integer}                                               |
 | get me | https://curhatin.herokuapp.com/account/me  | {token}                                               |
+| postComment get all | https://curhatin.herokuapp.com/postcomment/getall  | |
