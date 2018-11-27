@@ -3,9 +3,17 @@ require("dotenv").config();
 const models = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-exports.getAll = (req, res) => {
+exports.get = (req, res) => {
   models["posts-comments"]
     .findAll({ where: req.query ,include: [{model : models.post},{model : models.comment}]})
+    .then(result => {
+     res.send(result)
+    })
+    .catch(err => res.send(err));
+};
+exports.getall = (req, res) => {
+  models["posts-comments"]
+    .findAll({include: [{model : models.post},{model : models.comment}]})
     .then(result => {
      res.send(result)
     })
