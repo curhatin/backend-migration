@@ -19,6 +19,14 @@ exports.getOne = (req, res) => {
 
 
   };
+  exports.getBoth = (req,res) =>{
+    models.post
+    .findOne ({ where: { id: req.params.id},include : [models.comment]})
+    .then(post => console.log(post))
+    .catch(err => res.send(err))
+  }
+
+
 exports.post = (req, res) => {
   models.post
   .create(req.body)

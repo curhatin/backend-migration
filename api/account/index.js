@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const controller = require("./controller");
+const helpers = require("../helpers");
+
+
 router.get("/search", controller.search);
-router.get("/", controller.getAll);
+router.get("/", helpers.isAuthenticated,controller.getAll);
 router.get("/:id", controller.getOne);
 router.post("/login",controller.login)
 router.post("/register", controller.post);

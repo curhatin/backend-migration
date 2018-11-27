@@ -11,7 +11,7 @@ exports.getAll = (req, res) => {
 };
 exports.getOne = (req, res) => {
   models.account
-    .findOne({ where: { id: req.params.id } })
+    .findOne({ where: { id: req.body.id } })
     .then(account => res.send(account))
     .catch(err => res.send(err));
 };
