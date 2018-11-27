@@ -5,7 +5,7 @@ const models = require("../models");
 module.exports.isAuthenticated = (req, res, next) => {
   // Check Token
   const token =
-    (req.body.token && req.query.token.split(" ")[1]) ||
+    (req.body.token && req.body.token.split(" ")[1]) ||
     (req.query.token && req.query.token.split(" ")[1]) ||
     (req.headers.authorization && req.headers.authorization.split(" ")[1]) ||
     undefined;
