@@ -131,3 +131,10 @@ exports.emailGetOne = (req, res) => {
     .then(post => res.send(post))
     .catch(err => res.send(err));
 };
+
+exports.getById = (req, res) => {
+  models.post
+    .findAll({ where: { accountId : req.params.id } })
+    .then(post => res.send(post))
+    .catch(err => res.send(err));
+};
