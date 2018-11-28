@@ -6,13 +6,28 @@ const jwt = require("jsonwebtoken");
 
 exports.getAll = (req, res) => {
   models.post
-    .findAll({ include: [{ model: models["posts-comments"], include: [{model : models.comment}] }] })
+    .findAll({
+      include: [
+        {
+          model: models["posts-comments"],
+          include: [{ model: models.comment }]
+        }
+      ]
+    })
     .then(post => res.send(post))
     .catch(err => res.send(err));
 };
 exports.getOne = (req, res) => {
   models.post
-    .findOne({ where: { id: req.params.id },include: [{ model: models["posts-comments"], include: [{model : models.comment}] }]  })
+    .findOne({
+      where: { id: req.params.id },
+      include: [
+        {
+          model: models["posts-comments"],
+          include: [{ model: models.comment }]
+        }
+      ]
+    })
     .then(post => res.send(post))
     .catch(err => res.send(err));
 };
@@ -41,14 +56,18 @@ exports.post = (req, res) => {
     .catch(err => res.send(err));
 };
 exports.deleteOne = (req, res) => {
-  models.post
-    .findOne({ where: { id: req.params.id } })
-    .then(post => {
-      post
-        .destroy()
-        .then(result => res.send("success"))
-        .catch(err => console.log(err));
-    })
+  const postComment = models["posts-comments"].destroy({
+    where: { postId: req.params.id }
+  });
+
+  const comment = models.comment.destroy({ where: { postId: req.params.id } });
+  const tagPost = models["tags-posts"].destroy({
+    where: { postId: req.params.id }
+  });
+  const post = models.post.destroy({ where: { id: req.params.id } });
+
+  Promise.all([postComment, comment, tagPost, post])
+    .then(() => console.log("success"))
     .catch(err => console.log(err));
 };
 
@@ -134,7 +153,7 @@ exports.emailGetOne = (req, res) => {
 
 exports.getById = (req, res) => {
   models.post
-    .findAll({ where: { accountId : req.decoded.id } })
+    .findAll({ where: { accountId: req.decoded.id } })
     .then(post => res.send(post))
     .catch(err => res.send(err));
 };
