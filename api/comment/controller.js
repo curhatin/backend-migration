@@ -9,6 +9,12 @@ exports.getAll = (req, res) => {
     .then(comment => res.send(comment))
     .catch(err => res.send(err));
 };
+exports.getOne = (req, res) => {
+  models.comment
+    .findAll({where : {postId : req.params.id}})
+    .then(comment => res.send(comment))
+    .catch(err => res.send(err));
+};
 
 exports.post = (req, res) => {
   models.comment
