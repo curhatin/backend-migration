@@ -9,7 +9,7 @@ router.get("/search", controller.search);
 router.get("/", helpers.isAuthenticated,controller.getAll);
 
 router.post("/login",controller.login)
-router.post("/add", controller.post);
+router.post("/add",helpers.isAuthenticated, controller.post);
 router.delete("/:id", controller.deleteOne);
 router.delete("/", controller.deleteAll);
 

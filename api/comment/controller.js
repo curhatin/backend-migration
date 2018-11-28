@@ -17,6 +17,10 @@ exports.getOne = (req, res) => {
 };
 
 exports.post = (req, res) => {
+  req.body = {
+    ...req.body,
+    accountId:req.decoded.id
+  }
   models.comment
     .create(req.body)
     .then(comment => {
