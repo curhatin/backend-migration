@@ -11,4 +11,4 @@ Curhatin API
 | postComment get some | https://curhatin.herokuapp.com/postcomment/get  | {postId : integer}                                               |
 | get me | https://curhatin.herokuapp.com/account/me  | {token}                                               |
 | postComment get all | https://curhatin.herokuapp.com/postcomment/getall  | |
-| delete | https://curhatin.herokuapp.com/postcomment/getall  | |
+| delete | https://curhatin.herokuapp.com/post  |{postId : integer} |

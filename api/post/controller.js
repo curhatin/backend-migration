@@ -5,13 +5,18 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.getAll = (req, res) => {
+  console.log("test")
   models.post
     .findAll({
       include: [
+        
         {
           model: models["posts-comments"],
           include: [{ model: models.comment }]
         }
+      ] ,
+      order: [
+        [ 'createdAt', 'DESC']
       ]
     })
     .then(post => res.send(post))

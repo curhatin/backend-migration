@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         references: { model: "tags", key: "id" }
       },
-      post: { type: DataTypes.TEXT, allowNull: false }
+      post: { type: DataTypes.TEXT, allowNull: false },
+      createdAt: {type: DataTypes.DATETIME ,allowNull: false  }
     },
     {}
   );
