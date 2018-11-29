@@ -92,7 +92,15 @@ exports.search = (req, res) => {
   console.log(objWhere);
 
   models.post
-    .findAll({ where: objWhere })
+    .findAll({ where: objWhere 
+      ,
+      include: [
+        {
+          model: models["posts-comments"],
+          include: [{ model: models.comment }]
+        }
+      ]
+    })
     .then(result => {
       res.send(result);
     })
