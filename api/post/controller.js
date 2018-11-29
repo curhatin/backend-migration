@@ -96,12 +96,28 @@ exports.search = (req, res) => {
 
 exports.update = (req, res) => {
   req.body = { ...req.body, accountId: req.decoded.id };
-  models.post
-    .update({post : req.body.post , topic : req.body.topic}, {
+  
+  
+  const post =models.post
+    .update({post : req.body.post , topic : req.body.topic , tagId : req.body.tagId}, {
       where: {
         id: req.params.id
       }
     })
+    const tagPost = models["tags-posts"].update({tagId: req.body.tagId}, {
+      where: {
+        postId: req.params.id
+      }
+    })
+
+    Promise.all([post,tagPost])
+    .then(result => res.send(result))
+    .catch(err => res.send(err));
+};
+exports.tagSearch = (req, res) => {
+  console.log(req.query);
+  models.post
+    .findAll({ where: req.query })
     .then(result => res.send(result))
     .catch(err => res.send(err));
 };

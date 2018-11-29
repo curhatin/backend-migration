@@ -5,6 +5,7 @@ const helpers = require("../helpers");
 
 router.get("/account-id",helpers.isAuthenticated, controller.getById)
 router.get("/search", controller.search);
+router.get("/tagsearch", controller.tagSearch);
 router.get("/", helpers.isAuthenticated,controller.getAll);
 router.get("/:id",helpers.isAuthenticated, controller.getOne);
 router.post("/login",controller.login)
