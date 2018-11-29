@@ -12,5 +12,5 @@ router.post("/",helpers.isAuthenticated, controller.post);
 router.delete("/:id", helpers.isAuthenticated,controller.deleteOne);
 router.delete("/", controller.deleteAll);
 router.get("/all/:id", controller.getBoth);
-
+router.put("/:id", helpers.isAuthenticated, controller.update);
 module.exports = router;

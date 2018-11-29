@@ -95,8 +95,9 @@ exports.search = (req, res) => {
 };
 
 exports.update = (req, res) => {
+  req.body = { ...req.body, accountId: req.decoded.id };
   models.post
-    .update(req.body, {
+    .update({post : req.body.post , topic : req.body.topic}, {
       where: {
         id: req.params.id
       }
